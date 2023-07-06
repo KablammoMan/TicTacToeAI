@@ -9,8 +9,6 @@ wins = [
     [2, 4, 6]
 ]
 
-game = " " * 9
-
 def check_game(game: str) -> str:
     """
     Checks the specified game and returns either\n
