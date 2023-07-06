@@ -18,6 +18,3 @@ def check_game(game):
     return False
 
 scenarios = {}
-
-
-print(check_game(game))
