@@ -17,4 +17,5 @@ def check_game(game):
         return "DRAW"
     return False
 
-scenarios = {}
+def print_game(game):
+    print(f"{game[0:3]}\n{game[3:6]}\n{game[6:9]}\n")
