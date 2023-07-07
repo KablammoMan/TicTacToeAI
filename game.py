@@ -39,3 +39,7 @@ def move(game: str, move: int, turn: str) -> str:
         return False
     game[move] = turn
     return game
+
+def new_game() -> str:
+    """Returns an empty sting wiht length of 9 to be used for a tic tac toe game"""
+    return " " * 9
