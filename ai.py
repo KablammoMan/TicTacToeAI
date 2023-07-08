@@ -3,14 +3,14 @@ import random
 import json
 import os
 
-GAMES = 10**4
+GAMES = 10**6
 
 inputfile = open("poss.txt", "r")
 input_line = inputfile.readline()
-try:
+if input_line != "":
     poss = json.loads(input_line)
-except:
-    poss = {}
+else:
+    poss = {"X": {}, "O": {}}
 inputfile.close()
 
 for i in range(GAMES):
@@ -30,6 +30,23 @@ for i in range(GAMES):
             player = "O"
         else:
             player = "X"
+    winner = tictactoe.check_game(game)
+    if winner != "DRAW":
+        for k,v in thisgame[winner].items():
+            poss[winner][k].append(v)
+            poss[winner][k].append(v)
+        if winner == "X":
+            loser = "O"
+        else:
+            loser = "W"
+        for k,v in thisgame[loser].items():
+            poss[loser][k].remove(v)
+    else:
+        for k,v in thisgame["X"].items():
+            poss["X"][k].append(v)
+        for k,v in thisgame["O"].items():
+            poss["O"][k].append(v)
+
     os.system("cls")
     print(f"RUNNING {GAMES} TicTacToe Games")
     print(f"PROGRESS: {int((i+1)/GAMES*100*100)/100}%")
