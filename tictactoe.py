@@ -17,7 +17,7 @@ def check_game(game: str) -> str:
     c) 'CONTINUE' if the game should play on
     """
     for w in wins:
-        if game[w[0]] == game[w[1]] == game[w[2]]:
+        if game[w[0]] == game[w[1]] == game[w[2]] and game[w[0]] != " ":
             return game[w[0]]
     if not " " in game:
         return "DRAW"
@@ -37,8 +37,13 @@ def move(game: str, move: int, turn: str) -> str:
     """
     if game[move] != " ":
         return False
-    game[move] = turn
-    return game
+    modgame = ""
+    for i, s in enumerate(game):
+        if i != move:
+            modgame += s
+        else:
+            modgame += turn
+    return modgame
 
 def new_game() -> str:
     """Returns an empty sting with length of 9 to be used for a tic tac toe game"""
