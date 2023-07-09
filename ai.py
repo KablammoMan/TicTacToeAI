@@ -38,7 +38,7 @@ for i in range(GAMES):
         if winner == "X":
             loser = "O"
         else:
-            loser = "W"
+            loser = "X"
         for k,v in thisgame[loser].items():
             poss[loser][k].remove(v)
     else:
