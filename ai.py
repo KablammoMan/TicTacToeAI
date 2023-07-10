@@ -16,7 +16,10 @@ inputfile.close()
 for i in range(GAMES):
     thisgame = {"X": {}, "O": {}}
     game = tictactoe.new_game()
-    player = "X"
+    if i % 2 == 0:
+        player = "X"
+    else:
+        player = "O"
     while tictactoe.check_game(game) == "CONTINUE":
         if not game in poss[player].keys():
             spaces = []
