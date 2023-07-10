@@ -6,8 +6,8 @@ import os
 def move(game):
     pass
 
-def train():
-    GAMES = 10**5
+def train(amt):
+    GAMES = amt
 
     inputfile = open("poss.txt", "r")
     input_line = inputfile.readline()
