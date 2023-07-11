@@ -3,8 +3,29 @@ import random
 import json
 import os
 
-def move(game):
-    pass
+def move(player: str, game: str) -> None:
+    inputfile = open("poss.txt", "r")
+    input_line = inputfile.read()
+    if input_line != "":
+        poss = json.loads(input_line)
+    else:
+        poss = False
+    inputfile.close()
+
+    if not poss:
+        p = []
+        for i, s in enumerate(game):
+            if s == " ":
+                p.append(i)
+        return p[random.randint(0, len(p)-1)]
+    elif not poss[player][game] in poss[player].keys():
+        p = []
+        for i, s in enumerate(game):
+            if s == " ":
+                p.append(i)
+        return p[random.randint(0, len(p)-1)]
+    else:
+        return poss[player][game][random.randint(0, len(poss[player][game])-1)]
 
 def train(amt: int) -> None:
     GAMES = amt
