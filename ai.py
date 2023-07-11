@@ -6,7 +6,7 @@ import os
 def move(game):
     pass
 
-def train(amt):
+def train(amt: int) -> None:
     GAMES = amt
 
     inputfile = open("poss.txt", "r")
