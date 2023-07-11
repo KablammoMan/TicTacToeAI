@@ -3,23 +3,21 @@ import random
 import json
 import os
 
-def move(player: str, game: str) -> int:
-    "Uses the knowledge it has to make a decision regarding what move to play in the scenario 'game' if its symbol is 'player'"
+def read_poss() -> dict:
     inputfile = open("poss.txt", "r")
     input_line = inputfile.read()
     if input_line != "":
         poss = json.loads(input_line)
     else:
-        poss = False
+        poss = {"X": {}, "O": {}}
     inputfile.close()
+    return poss
 
-    if not poss:
-        p = []
-        for i, s in enumerate(game):
-            if s == " ":
-                p.append(i)
-        return p[random.randint(0, len(p)-1)]
-    elif not poss[player][game] in poss[player].keys():
+def move(player: str, game: str) -> int:
+    "Uses the knowledge it has to make a decision regarding what move to play in the scenario 'game' if its symbol is 'player'"
+    poss = read_poss()
+
+    if not poss[player][game] in poss[player].keys():
         p = []
         for i, s in enumerate(game):
             if s == " ":
@@ -32,13 +30,7 @@ def train(amt: int) -> None:
     "Trains the AI on 'amt' games"
     GAMES = amt
 
-    inputfile = open("poss.txt", "r")
-    input_line = inputfile.readline()
-    if input_line != "":
-        poss = json.loads(input_line)
-    else:
-        poss = {"X": {}, "O": {}}
-    inputfile.close()
+    poss = read_poss()
 
     for i in range(GAMES):
         thisgame = {"X": {}, "O": {}}
@@ -93,4 +85,9 @@ def remove() -> None:
     f.close()
 
 def game_result(moves: dict, player: str, result: str) -> None:
-    pass
+    poss = read_poss()
+
+    if result != player and result != "D": # AI LOST
+        for k,v in moves.items():
+            if not k in poss[player].keys():
+                pass
