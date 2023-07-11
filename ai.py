@@ -87,7 +87,10 @@ def train(amt: int) -> None:
     ouputfile.write(json.dumps(poss))
     ouputfile.close()
 
-def remove():
+def remove() -> None:
     f = open("poss.txt", "w")
     f.write("")
     f.close()
+
+def game_result(moves: dict, player: str, result: str) -> None:
+    pass
