@@ -3,7 +3,7 @@ import random
 import json
 import os
 
-def move(player: str, game: str) -> None:
+def move(player: str, game: str) -> int:
     "Uses the knowledge it has to make a decision regarding what move to play in the scenario 'game' if its symbol is 'player'"
     inputfile = open("poss.txt", "r")
     input_line = inputfile.read()
