@@ -4,6 +4,7 @@ import json
 import os
 
 def move(player: str, game: str) -> None:
+    "Uses the knowledge it has to make a decision regarding what move to play in the scenario 'game' if its symbol is 'player'"
     inputfile = open("poss.txt", "r")
     input_line = inputfile.read()
     if input_line != "":
@@ -28,6 +29,7 @@ def move(player: str, game: str) -> None:
         return poss[player][game][random.randint(0, len(poss[player][game])-1)]
 
 def train(amt: int) -> None:
+    "Trains the AI on 'amt' games"
     GAMES = amt
 
     inputfile = open("poss.txt", "r")
