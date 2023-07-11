@@ -26,10 +26,11 @@ def check_game(game: str) -> str:
 def print_game(game: str, index: bool) -> None:
     """
     Prints out the specified game in a human readable format\n
-    index (bool) - whether to print spaces as spaces, or the index of the game
+    index (bool) - whether to print spaces as spaces, or the index of the game\n
+    Returns the string that was printed
     """
     if not index:
-        print(f"{game[0:3]}\n{game[3:6]}\n{game[6:9]}\n")
+        pgame = f"{game[0:3]}\n{game[3:6]}\n{game[6:9]}\n"
     else:
         pgame = ""
         for i, s in enumerate(game):
@@ -37,7 +38,9 @@ def print_game(game: str, index: bool) -> None:
                 pgame += i
             else:
                 pgame += s
-        print(pgame)
+        pgame += "\n"
+    print(pgame)
+    return pgame
 
 def move(game: str, move: int, turn: str) -> str:
     """
