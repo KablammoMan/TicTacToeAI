@@ -84,3 +84,8 @@ def train(amt: int) -> None:
     ouputfile = open("poss.txt", "w")
     ouputfile.write(json.dumps(poss))
     ouputfile.close()
+
+def remove():
+    f = open("poss.txt")
+    f.write("")
+    f.close()
