@@ -17,7 +17,7 @@ def move(player: str, game: str) -> int:
     "Uses the knowledge it has to make a decision regarding what move to play in the scenario 'game' if its symbol is 'player'"
     poss = read_poss()
 
-    if not poss[player][game] in poss[player].keys():
+    if not game in poss[player].keys():
         p = []
         for i, s in enumerate(game):
             if s == " ":
