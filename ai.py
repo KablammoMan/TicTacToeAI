@@ -86,6 +86,6 @@ def train(amt: int) -> None:
     ouputfile.close()
 
 def remove():
-    f = open("poss.txt")
+    f = open("poss.txt", "w")
     f.write("")
     f.close()
