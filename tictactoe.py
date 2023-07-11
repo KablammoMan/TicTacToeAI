@@ -38,6 +38,8 @@ def print_game(game: str, index: bool) -> None:
                 pgame += str(i)
             else:
                 pgame += s
+            if (i+1) % 3 == 0:
+                pgame += "\n"
         pgame += "\n"
     print(pgame)
     return pgame
