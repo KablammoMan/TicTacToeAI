@@ -23,9 +23,21 @@ def check_game(game: str) -> str:
         return "DRAW"
     return "CONTINUE"
 
-def print_game(game: str) -> None:
-    "Prints out the specified game in a human readable format"
-    print(f"{game[0:3]}\n{game[3:6]}\n{game[6:9]}\n")
+def print_game(game: str, index: bool) -> None:
+    """
+    Prints out the specified game in a human readable format\n
+    index (bool) - whether to print spaces as spaces, or the index of the game
+    """
+    if not index:
+        print(f"{game[0:3]}\n{game[3:6]}\n{game[6:9]}\n")
+    else:
+        pgame = ""
+        for i, s in enumerate(game):
+            if s == " ":
+                pgame += i
+            else:
+                pgame += s
+        print(pgame)
 
 def move(game: str, move: int, turn: str) -> str:
     """
