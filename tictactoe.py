@@ -29,9 +29,9 @@ def print_game(game: str, index: bool) -> None:
     index (bool) - whether to print spaces as spaces, or the index of the game\n
     Returns the string that was printed
     """
-    if not index:
-        pgame = f"{game[0:3]}\n{game[3:6]}\n{game[6:9]}\n"
-    else:
+    pgame = f"{game[0:3]}\n{game[3:6]}\n{game[6:9]}\n"
+    print(pgame)
+    if index:
         pgame = ""
         for i, s in enumerate(game):
             if s == " ":
