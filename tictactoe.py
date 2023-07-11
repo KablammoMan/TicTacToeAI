@@ -35,7 +35,7 @@ def print_game(game: str, index: bool) -> None:
         pgame = ""
         for i, s in enumerate(game):
             if s == " ":
-                pgame += i
+                pgame += str(i)
             else:
                 pgame += s
         pgame += "\n"
