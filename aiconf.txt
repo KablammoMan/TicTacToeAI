@@ -1,1 +1,1 @@
-{"amt_empty": 5, "train": 10000, "learn_player": 1}
+{"amt_empty": 1, "train": 10000, "learn_player": 1}
