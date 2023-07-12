@@ -1,3 +1,4 @@
+import threading
 import tictactoe
 import random
 import json
@@ -52,8 +53,10 @@ def move(player: str, game: str) -> int:
     else:
         return poss[player][game][random.randint(0, len(poss[player][game])-1)]
 
-def train(amt: int) -> None:
-    "Trains the AI on 'amt' games"
+def train(amt: int, rand: str) -> None:
+    """
+    Trains the AI on 'amt' games. 'rand' is just cus threading was being annoying
+    """
     GAMES = amt
 
     poss = read_poss()
@@ -98,7 +101,7 @@ def train(amt: int) -> None:
             for k,v in thisgame["O"].items():
                 poss["O"][k].append(v)
 
-        os.system("cls")
+        # os.system("cls")
         print(f"RUNNING {GAMES} TicTacToe Games")
         print(f"PROGRESS: {int((i+1)/GAMES*100*100)/100}%")
 
@@ -158,3 +161,13 @@ def game_result(moves: dict, player: str, result: str) -> None:
                     poss[ai][k].append(v)
     write_poss(poss)
     write_conf(conf)
+
+def train_thread(threads: int, amt: int):
+    ts = []
+    for i in range(threads):
+        t = threading.Thread(target=train, args=(100, "Thread helper"), daemon=True)
+        ts.append(t)
+    for t in ts:
+        t.start()
+        t.join()
+        print("Created New Thread")
