@@ -53,7 +53,7 @@ def move(player: str, game: str) -> int:
     else:
         return poss[player][game][random.randint(0, len(poss[player][game])-1)]
 
-def train(amt: int, rand: str) -> None:
+def train(amt: int) -> None:
     """
     Trains the AI on 'amt' games. 'rand' is just cus threading was being annoying
     """
@@ -165,7 +165,7 @@ def game_result(moves: dict, player: str, result: str) -> None:
 def train_thread(threads: int, amt: int):
     ts = []
     for i in range(threads):
-        t = threading.Thread(target=train, args=(100, "Thread helper"), daemon=True)
+        t = threading.Thread(target=train, args=[100], daemon=True)
         ts.append(t)
     for t in ts:
         t.start()
