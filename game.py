@@ -28,7 +28,7 @@ while tictactoe.check_game(game) == "CONTINUE":
     else:
         pgam = tictactoe.print_game(game, False)
         print("AI TURN")
-        time.sleep(random.randint(1, 5))
+        time.sleep(random.randint(1, 2))
         ait = ai.move(turn, game)
         aim[game] = ait
         game = tictactoe.move(game, ait, turn)
