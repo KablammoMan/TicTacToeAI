@@ -99,7 +99,10 @@ def train(amt: int) -> None:
             for k,v in thisgame["O"].items():
                 poss["O"][k].append(v)
 
-        print(f"PROGRESS: {int((i+1)/GAMES*100*100)/100}%")
+        pc = int((i+1)/GAMES*100*100)/100
+        if pc >= target:
+            print(f"PROGRESS: {int((i+1)/GAMES*100*100)/100}%")
+            target += conf["target_interval"]
 
     write_poss(poss)
     write_conf(conf)
