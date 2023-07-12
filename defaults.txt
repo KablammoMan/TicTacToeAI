@@ -2,4 +2,4 @@ poss.txt:
 {"X": {}, "O": {}}
 
 aiconf.txt:
-{"amt_empty": 3, "train": 10000, "learn_player": 1}
+{"amt_empty": 3, "learn_player": 1, "target_interval": 1}
