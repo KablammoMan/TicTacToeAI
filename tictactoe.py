@@ -41,7 +41,7 @@ def print_game(game: str, index: bool) -> None:
             if (i+1) % 3 == 0:
                 pgame += "\n"
         pgame += "\n"
-    print(pgame)
+        print(pgame)
     return pgame
 
 def move(game: str, move: int, turn: str) -> str:
