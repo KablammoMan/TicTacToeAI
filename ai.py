@@ -10,11 +10,7 @@ def read_conf() -> dict:
     if input_line != "":
         conf = json.loads(input_line)
     else:
-        conf = {
-            "amt_empty": 5,
-            "train": 10000,
-            "learn_player": 0
-        }
+        conf = {"amt_empty": 3, "train": 10000, "learn_player": 1}
         write_conf(conf)
     inputfile.close()
     return conf
@@ -62,6 +58,7 @@ def train(amt: int) -> None:
     poss = read_poss()
     conf = read_conf()
     print(f"RUNNING {GAMES} TicTacToe Games")
+    target = 0
 
     for i in range(GAMES):
         thisgame = {"X": {}, "O": {}}
