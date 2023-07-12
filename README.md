@@ -6,6 +6,8 @@ Based off that matchbox computer AI that had beads inside of matchboxes to repre
 # aiconf.txt - The config file for the AI
 - `amt_empty` (int, default=3) -- How many of each index should be inserted into list when a new scenario is discovered
 - `learn_player` (int, default=1) -- If 0, AI does not learn when `game.py` is run. If any other value, will learn from player games.
+- `train` (int default=10000) -- How many games to simulate when `train.py` is run
+- `target_interval`
 
 # AUTHOR'S NOTE
 The only *'effective'* way for the AI to learn is by playing games against a human player with `learn_player` set to 1 in `aiconf.txt`. This is due to the `train.py` script only training the AI against itself, which means it can reward a move that was actually bad, but only worked because it was playing another copy of itself, which chose randomly and had no strategy behind its moves. I may implement a win checker script in `ai.py` that computes whether either player can win in one move, and thus, limit the possible spaces to ones that will make it win or stop the opponent from winning.
