@@ -61,6 +61,7 @@ def train(amt: int) -> None:
 
     poss = read_poss()
     conf = read_conf()
+    print(f"RUNNING {GAMES} TicTacToe Games")
 
     for i in range(GAMES):
         thisgame = {"X": {}, "O": {}}
@@ -101,8 +102,6 @@ def train(amt: int) -> None:
             for k,v in thisgame["O"].items():
                 poss["O"][k].append(v)
 
-        os.system("cls")
-        print(f"RUNNING {GAMES} TicTacToe Games")
         print(f"PROGRESS: {int((i+1)/GAMES*100*100)/100}%")
 
     write_poss(poss)
