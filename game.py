@@ -28,7 +28,6 @@ while tictactoe.check_game(game) == "CONTINUE":
     else:
         pgam = tictactoe.print_game(game, False)
         print("AI TURN")
-        time.sleep(random.randint(1, 2))
         ait = ai.move(turn, game)
         aim[game] = ait
         game = tictactoe.move(game, ait, turn)
@@ -36,7 +35,6 @@ while tictactoe.check_game(game) == "CONTINUE":
         turn = "O"
     else:
         turn = "X"
-    os.system("cls")
 
 winner = tictactoe.check_game(game)
 ai.game_result(aim, clpl, winner)
