@@ -101,7 +101,7 @@ def train(amt: int) -> None:
             for k,v in thisgame["O"].items():
                 poss["O"][k].append(v)
 
-        # os.system("cls")
+        os.system("cls")
         print(f"RUNNING {GAMES} TicTacToe Games")
         print(f"PROGRESS: {int((i+1)/GAMES*100*100)/100}%")
 
