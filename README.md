@@ -6,7 +6,7 @@ Based off that matchbox computer AI that had beads inside of matchboxes to repre
 # aiconf.txt - The config file for the AI
 - `amt_empty` (int, default=3) -- How many of each index should be inserted into list when a new scenario is discovered
 - `learn_player` (int, default=1) -- If 0, AI does not learn when `game.py` is run. If any other value, will learn from player games.
-- `train` (int default=10000) -- How many games to simulate when `train.py` is run
+- `train` (int, default=10000) -- How many games to simulate when `train.py` is run
 - `target_interval`
 
 # AUTHOR'S NOTE
