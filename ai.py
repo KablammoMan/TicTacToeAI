@@ -2,6 +2,7 @@ import threading
 import tictactoe
 import random
 import json
+import tqdm
 import os
 
 def read_conf() -> dict:
@@ -36,9 +37,8 @@ def write_conf(conf: dict) -> None:
     ouputfile.write(json.dumps(conf))
     ouputfile.close()
 
-def move(player: str, game: str) -> int:
+def move(player: str, game: str, poss: dict) -> int:
     "Uses the knowledge it has to make a decision regarding what move to play in the scenario 'game' if its symbol is 'player'"
-    poss = read_poss()
 
     if not game in poss[player].keys():
         p = []
@@ -49,18 +49,16 @@ def move(player: str, game: str) -> int:
     else:
         return poss[player][game][random.randint(0, len(poss[player][game])-1)]
 
-def train(amt: int) -> None:
+def train(amt: int, poss: dict, conf: dict) -> None:
     """
     Trains the AI on 'amt' games. 'rand' is just cus threading was being annoying
     """
     GAMES = amt
 
-    poss = read_poss()
-    conf = read_conf()
     print(f"RUNNING {GAMES} TicTacToe Games")
     target = 0
 
-    for i in range(GAMES):
+    for i in tqdm.trange(GAMES):
         thisgame = {"X": {}, "O": {}}
         game = tictactoe.new_game()
         if i % 2 == 0:
@@ -99,67 +97,57 @@ def train(amt: int) -> None:
             for k,v in thisgame["O"].items():
                 poss["O"][k].append(v)
 
-        pc = int((i+1)/GAMES*100*100)/100
-        if pc >= target:
-            print(f"PROGRESS: {int((i+1)/GAMES*100*100)/100}%")
-            target += conf["target_interval"]
-
     write_poss(poss)
-    write_conf(conf)
 
 def remove() -> None:
     f = open("poss.txt", "w")
     f.write("")
     f.close()
 
-def game_result(moves: dict, player: str, result: str) -> None:
-    poss = read_poss()
-    conf = read_conf()
-    if conf["learn_player"] != 0:
-        if player == "X":
-            ai = "O"
-        else:
-            ai = "X"
-        if result != ai and result != "DRAW": # AI LOST
-            for k,v in moves.items():
-                if not k in poss[ai].keys():
-                    sp = []
-                    for si, i in enumerate(k):
-                        if i == " ":
-                            for s in range(conf["amt_empty"]):
-                                sp.append(si)
-                    sp.remove(v)
-                    poss[ai][k] = sp
-                else:
-                    poss[ai][k].remove(v)
-        elif result == "DRAW": # AI DREW
-            for k,v in moves.items():
-                if not k in poss[ai].keys():
-                    sp = []
-                    for si, i in enumerate(k):
-                        if i == " ":
-                            for s in range(conf["amt_empty"]):
-                                sp.append(si)
-                    sp.append(v)
-                    poss[ai][k] = sp
-                else:
-                    poss[ai][k].append(v)
-        else: # AI WON
-            for k,v in moves.items():
-                if not k in poss[ai].keys():
-                    sp = []
-                    for si, i in enumerate(k):
-                        if i == " ":
-                            for s in range(conf["amt_empty"]):
-                                sp.append(si)
-                    sp.append(v)
-                    sp.append(v)
-                    poss[ai][k] = sp
-                else:
-                    poss[ai][k].append(v)
-                    poss[ai][k].append(v)
+def game_result(moves: dict, player: str, result: str, poss: dict, conf: dict) -> None:
+    if player == "X":
+        ai = "O"
+    else:
+        ai = "X"
+    if result != ai and result != "DRAW": # AI LOST
+        for k,v in moves.items():
+            if not k in poss[ai].keys():
+                sp = []
+                for si, i in enumerate(k):
+                    if i == " ":
+                        for s in range(conf["amt_empty"]):
+                            sp.append(si)
+                sp.remove(v)
+                poss[ai][k] = sp
+            else:
+                poss[ai][k].remove(v)
+    elif result == "DRAW": # AI DREW
+        for k,v in moves.items():
+            if not k in poss[ai].keys():
+                sp = []
+                for si, i in enumerate(k):
+                    if i == " ":
+                        for s in range(conf["amt_empty"]):
+                            sp.append(si)
+                sp.append(v)
+                poss[ai][k] = sp
+            else:
+                poss[ai][k].append(v)
+    else: # AI WON
+        for k,v in moves.items():
+            if not k in poss[ai].keys():
+                sp = []
+                for si, i in enumerate(k):
+                    if i == " ":
+                        for s in range(conf["amt_empty"]):
+                            sp.append(si)
+                sp.append(v)
+                sp.append(v)
+                poss[ai][k] = sp
+            else:
+                poss[ai][k].append(v)
+                poss[ai][k].append(v)
     write_poss(poss)
-    write_conf(conf)
 
 def train_thread(threads: int, amt: int):
     ts = []

@@ -1,7 +1,6 @@
 import ai
 import time
 conf = ai.read_conf()
-start = time.time()
-ai.train(conf["train"])
-end = time.time()
-print(f"Took {int((end - start)*100)/100}s")
+poss = ai.read_poss()
+ai.train(conf["train"], poss, conf)
+print(f"Finished Training!")

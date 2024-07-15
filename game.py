@@ -5,6 +5,8 @@ import ai
 import os
 
 game = tictactoe.new_game()
+poss = ai.read_poss()
+conf = ai.read_conf()
 
 print("Flipping a coin to see who goes first")
 time.sleep(1)
@@ -28,7 +30,7 @@ while tictactoe.check_game(game) == "CONTINUE":
     else:
         pgam = tictactoe.print_game(game, False)
         print("AI TURN")
-        ait = ai.move(turn, game)
+        ait = ai.move(turn, game, poss)
         aim[game] = ait
         game = tictactoe.move(game, ait, turn)
     if turn == "X":
@@ -37,7 +39,8 @@ while tictactoe.check_game(game) == "CONTINUE":
         turn = "X"
 
 winner = tictactoe.check_game(game)
-ai.game_result(aim, clpl, winner)
+if conf["learn_player"] != 0:
+    ai.game_result(aim, clpl, winner, poss, conf)
 if winner != "DRAW":
     print(f"{winner} WON!")
 else:
